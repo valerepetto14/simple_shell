@@ -15,7 +15,7 @@ int ContTokens(char *cadena1);
 char *find_PATH(char **env);
 char **cargar(char *cadena, char **array);
 list_token llenar_lista(char *path, list_token *lista);
-list_token *add_node_end(list_t **head, const char *str);
+list_token *add_node_end(list_t token **head, const char *str);
 
 /**
  *struct node - structure definition
