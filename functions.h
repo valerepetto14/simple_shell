@@ -18,3 +18,62 @@ int ContTokens(char *cadena1)
 	}
 	return (cont);
 }
+
+/**
+ *find_PATH - Finds the PATH in the enviroment command
+ *@env: environ command
+ *Return: Ruta, which is the PATH
+ **/
+char *find_PATH(char **env)
+{
+	char *ruta = NULL;
+	char *token;
+	char *copy;
+	const char *name = "PATH";
+	int iter = 0;
+
+	for (iter = 0; env[iter] != NULL; iter++)
+	{
+		copy = strdup(env[iter]);
+		token = strtok(copy, "=");
+	if (strcmp(token, name) == 0)
+	{
+		token = strtok(NULL, "=");
+		ruta = token;
+	}
+}
+	return (ruta);
+}
+
+/**
+ *cargar - Function that returns the array to execute
+ *@cadena: string given by the user
+ *@array: array of strings given by the user
+ *Return: Array
+ **/
+char **cargar(char *cadena, char **array)
+{
+	int iter = 0;
+	char *copycadena = NULL;
+	int tokens = 0;
+	char *token = NULL;
+
+	copycadena = strdup(cadena);
+	cadena = strtok(cadena, "\n");
+	tokens = ContTokens(copycadena);
+	array = calloc(tokens + 1, sizeof(char *));
+	token = strtok(cadena, " ");
+
+	while (token != NULL && iter < tokens) /*Lleno el array*/
+	{
+		array[iter] = token;
+		iter++;
+		token = strtok(NULL, " ");
+	}
+	
+	array[tokens] = NULL;
+	free(copycadena);
+	return (array);
+}
+
+
