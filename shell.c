@@ -10,13 +10,15 @@ int main(int __attribute__((unused)) argc, char  __attribute__((unused)) *argv[]
 {
 	pid_t hijo;
 	char *path = find_PATH(env);
+	char *path2 = NULL;
 	list_token *lista = NULL;
 	ssize_t bytes_leidos;
 	size_t numero_bytes = 0;
 	char **array = NULL, *cadena = NULL;
-
+	
 	while (1)
 	{
+		lista = NULL;
 		printf(VERDE_T "$cisfun " BLANCO_T);
 		bytes_leidos = getline(&cadena, &numero_bytes, stdin);
 		if (cadena[0] == '\n')
@@ -31,11 +33,18 @@ int main(int __attribute__((unused)) argc, char  __attribute__((unused)) *argv[]
 		}
 		else
 		{
-			array = cargar(cadena, array);
 			lista = llenar_lista(path, lista);
-			print_list(lista);
+			array = cargar(cadena, array);
+			path2 = verifica(lista,array[0]);
+			printf("%s", path2);
+		if (path2 == NULL)
+		{
+			continue;
+		}
+		else
+		{
+			array[0] = path2;
 			hijo = fork();
-
 			if (hijo == 0) /*Dentro del hijo*/
 			{
 				if (execve(array[0], array, NULL) == -1) /*Tratamos de ejecutar el coman*/
@@ -51,6 +60,7 @@ int main(int __attribute__((unused)) argc, char  __attribute__((unused)) *argv[]
 				wait(NULL);
 			}
 			free(cadena);
+		}
 		}
 		free(array);
 		bytes_leidos = 0;

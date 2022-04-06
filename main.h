@@ -1,6 +1,6 @@
 #ifndef MAIN_H
 #define MAIN_H
-
+#include <sys/stat.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -19,7 +19,7 @@ typedef struct node
 {
         char *token;
         struct node *next;
-}list_token;
+} list_token;
 
 int ContTokens(char *cadena1);
 char *find_PATH(char **env);
@@ -27,4 +27,6 @@ char **cargar(char *cadena, char **array);
 list_token *llenar_lista(char *path, list_token *lista);
 list_token *add_node_end(list_token **token, const char *str);
 size_t print_list(const list_token *token);
+char *verifica(const list_token *lista, char *comando);
+void free_list(list_token *head);
 #endif

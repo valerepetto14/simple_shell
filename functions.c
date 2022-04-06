@@ -59,7 +59,8 @@ list_token *add_node_end(list_token **token, const char *str)
 	new_node = malloc(sizeof(list_token));
 	if (new_node == NULL)
 		return (NULL);
-	new_node->token = strdup(str);
+	
+	new_node->token = strcat(strdup(str),"/");
 	new_node->next = NULL;
 
 	if (*token == NULL)
@@ -119,50 +120,3 @@ list_token *llenar_lista(char *path, list_token *lista)
 	}
 	return (lista);		
 }
-/**
- *print_list - printea
- *@h: puntero
- *Return: size
- **/
-size_t print_list(const list_token *token)
-{
-size_t n = 0;
-while (token != NULL)
-{
-	if (!token)
-		return (0);
-	if (!token->token)
-	{
-		printf("[0] (nil)\n");
-	}
-	else
-		 printf("%s\n", token->token);
-	token = token->next;
-	n++;
-}
-	return (n);
-}
-
-/**
- *verifica - printea
- *@h: puntero
- *Return: size
- **/
-char *verifica(const list_token *lista)
-{
-char *txt = "dale";
-while (lista != NULL)
-{
-	if (!lista)
-		NULL;
-	if (!lista->token)
-	{
-		printf("[0] (nil)\n");
-	}
-	else
-		 printf("%s\n", strcat(lista->token, txt));
-	lista = lista->next;
-}
-	return (strcat(lista->token, txt));
-}
-
