@@ -11,5 +11,7 @@
 #define VERDE_T        "\x1b[32m"
 
 int ContTokens(char *cadena1);
+char *find_PATH(char **env);
+char **cargar(char *cadena, char **array);
 
 #endif
