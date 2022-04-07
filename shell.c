@@ -38,6 +38,7 @@ int main(int __attribute__((unused)) argc, char  __attribute__((unused)) *argv[]
 			path2 = verifica(lista,array[0]);
 		if (path2 == NULL)
 		{
+			perror(" ERROR");
 			continue;
 		}
 		else

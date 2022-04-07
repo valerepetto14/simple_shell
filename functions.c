@@ -34,9 +34,9 @@ char *find_PATH(char **env)
 
 	for (iter = 0; env[iter] != NULL; iter++)
 	{
-		copy = strdup(env[iter]);
+		copy = _strdup(env[iter]);
 		token = strtok(copy, "=");
-		if (strcmp(token, name) == 0)
+		if (_strcmp(token, name) == 0)
 		{
 			token = strtok(NULL, "=");
 			ruta = token;
@@ -52,17 +52,16 @@ char *find_PATH(char **env)
  *@str: texto
  *Return: size
  **/
-list_token *add_node_end(list_token **token, const char *str)
+list_token *add_node_end(list_token **token, char *str)
 {
 	list_token *new_node = NULL;
 	list_token *aux = *token;
-	/*char *comando = strdup(str);*/
 
 	new_node = calloc(1,sizeof(list_token));
 	if (new_node == NULL)
 		return (NULL);
 	
-	new_node->token = strcat(strdup(str),"/");
+	new_node->token = _strcat(_strdup(str),"/");
 	new_node->next = NULL;
 
 	if (*token == NULL)
