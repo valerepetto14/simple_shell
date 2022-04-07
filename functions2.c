@@ -26,14 +26,14 @@ while (token != NULL)
 char *verifica(const list_token *lista, char *comando)
 {
 struct stat buf;
-char *path;
+char *path = NULL;
 while (lista != NULL)
 {
 	if (!lista)
 		return (NULL);
 	if (!lista->next)
 	{	
-		path = strcat(lista->token, comando);		
+		path = _strcat(lista->token, comando);		
 		if (stat(path, &buf) == 0)
 		{
 			return (path);
@@ -41,7 +41,7 @@ while (lista != NULL)
 		break;
 	}
 		
-		path = strcat(lista->token, comando);
+		path = _strcat(lista->token, comando);
 		if (stat(path, &buf) == 0)
 		{
 			return (path);
@@ -67,62 +67,11 @@ void free_list(list_token *head)
 		}
 }
 
-/**
-*_strcmp- asd
-*@s1: asd
-*@s2: asd
-*Return: asd
-**/
-int _strcmp(char *s1, char *s2)
+int verifica_exit(char *cadena)
 {
-	while (*s1 && *s2 && *s1 == *s2)
-	{
-		s1++;
-		s2++;
-	}
+	char *cadena2 = _strdup(cadena);
+	char *exit = "exit";
 
-	return (*s1 - *s2);
+	cadena2 = strtok(cadena2, "\n");
+	return (_strcmp(exit, cadena2));
 }
-/**
- * _strcat - sss
- * @s: 123
- *@*dest: 122
- *@*src: 1223
- *Return: 2
- **/
-char *_strcat(char *dest, char *src)
-{
-	int contdest = _strlen(dest), a = 0, c = 0;
-	int contsrc = _strlen(src);
-
-	for (a = contdest; a < contdest + contsrc; a++)
-	{
-		if (c <= contsrc)
-		{
-		dest[a] = src[c];
-		c++;
-		}
-	}
-	return (dest);
-}
-
-/**
- *_strlen - 123
- *@s: 123
- *Return: 12
- **/
-int _strlen(char *s)
-{
-		int cont = 0;
-		char *a;
-
-		a = s;
-
-		while (*a != 0)
-		{
-			a++;
-			cont++;
-		}
-		return (cont);
-}
-

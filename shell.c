@@ -27,7 +27,7 @@ int main(int __attribute__((unused)) argc, char  __attribute__((unused)) *argv[]
 			cadena = NULL;
 			continue;
 		}
-		else if (bytes_leidos == -1 || cadena[0] == EOF)
+		else if (bytes_leidos == -1 || cadena[0] == EOF || verifica_exit(cadena) == 0)
 		{
 			break;
 		}
@@ -67,6 +67,5 @@ int main(int __attribute__((unused)) argc, char  __attribute__((unused)) *argv[]
 		cadena = NULL;
 	}
 	free(cadena);
-	free(lista);
 	return (0);
 }

@@ -26,23 +26,8 @@ int ContTokens(char *cadena1)
  **/
 char *find_PATH(char **env)
 {
-	char *ruta = NULL;
-	char *token = NULL;
-	char *copy = NULL;
-	char *name = "PATH";
-	int iter = 0;
-
-	for (iter = 0; env[iter] != NULL; iter++)
-	{
-		copy = _strdup(env[iter]);
-		token = strtok(copy, "=");
-		if (_strcmp(token, name) == 0)
-		{
-			token = strtok(NULL, "=");
-			ruta = token;
-		}
-	}
-	free(copy);
+	char *ruta = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin";
+	printf("%s", env[0]);
 	return (ruta);
 }
 
@@ -91,7 +76,7 @@ char **cargar(char *cadena, char **array)
 	int tokens = 0;
 	char *token = NULL;
 
-	copycadena = strdup(cadena);
+	copycadena = _strdup(cadena);
 	cadena = strtok(cadena, "\n");
 	tokens = ContTokens(copycadena);
 	array = calloc(tokens + 1, sizeof(char *));
