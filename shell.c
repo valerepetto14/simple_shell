@@ -12,7 +12,7 @@ int main(int __attribute__((unused)) argc, char  __attribute__((unused)) *argv[]
 	char *path = find_PATH(env);
 	char *path2 = NULL;
 	list_token *lista = NULL;
-	ssize_t bytes_leidos;
+	ssize_t bytes_leidos = 0;
 	size_t numero_bytes = 0;
 	char **array = NULL, *cadena = NULL;
 	
@@ -36,7 +36,6 @@ int main(int __attribute__((unused)) argc, char  __attribute__((unused)) *argv[]
 			lista = llenar_lista(path, lista);
 			array = cargar(cadena, array);
 			path2 = verifica(lista,array[0]);
-			printf("%s", path2);
 		if (path2 == NULL)
 		{
 			continue;
@@ -67,5 +66,6 @@ int main(int __attribute__((unused)) argc, char  __attribute__((unused)) *argv[]
 		cadena = NULL;
 	}
 	free(cadena);
+	free(lista);
 	return (0);
 }

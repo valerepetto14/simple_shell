@@ -27,9 +27,9 @@ int ContTokens(char *cadena1)
 char *find_PATH(char **env)
 {
 	char *ruta = NULL;
-	char *token;
-	char *copy;
-	const char *name = "PATH";
+	char *token = NULL;
+	char *copy = NULL;
+	char *name = "PATH";
 	int iter = 0;
 
 	for (iter = 0; env[iter] != NULL; iter++)
@@ -42,6 +42,7 @@ char *find_PATH(char **env)
 			ruta = token;
 		}
 	}
+	free(copy);
 	return (ruta);
 }
 
@@ -53,10 +54,11 @@ char *find_PATH(char **env)
  **/
 list_token *add_node_end(list_token **token, const char *str)
 {
-	list_token *new_node;
+	list_token *new_node = NULL;
 	list_token *aux = *token;
+	/*char *comando = strdup(str);*/
 
-	new_node = malloc(sizeof(list_token));
+	new_node = calloc(1,sizeof(list_token));
 	if (new_node == NULL)
 		return (NULL);
 	
@@ -104,15 +106,15 @@ char **cargar(char *cadena, char **array)
 	}
 	
 	array[tokens] = NULL;
-	free(copycadena);
 	return (array);
 }
 
 list_token *llenar_lista(char *path, list_token *lista)
 {
 	char *token = NULL;
+	char *path2 = strdup(path);
 
-	token =	strtok(path, ":");
+	token =	strtok(path2, ":");
 	while(token != NULL)	
 	{
 		add_node_end(&lista, token);
