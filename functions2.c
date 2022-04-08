@@ -16,14 +16,14 @@ while (token != NULL)
 		printf("[0] (nil)\n");
 	}
 	else
-		 printf("%s\n", token->token);
+		printf("%s\n", token->token);
 	token = token->next;
 	n++;
 }
 	return (n);
 }
 
-char *verifica(const list_token *lista, char *comando)
+char *verifica(list_token *lista, char *comando)
 {
 struct stat buf;
 char *path = NULL;
@@ -33,24 +33,25 @@ while (lista != NULL)
 		return (NULL);
 	if (!lista->next)
 	{	
-		path = _strcat(lista->token, comando);		
+		path = strcat(lista->token, comando);		
 		if (stat(path, &buf) == 0)
 		{
+			free_list(lista);
 			return (path);
 		}
 		break;
 	}
 		
-		path = _strcat(lista->token, comando);
+		path = strcat(lista->token, comando);
 		if (stat(path, &buf) == 0)
 		{
+			free_list(lista);
 			return (path);
 		}
 
 	lista = lista->next;
 }
-	printf("%s",path);
-	return (NULL);
+return (NULL);
 }
 
 /**
@@ -69,9 +70,24 @@ void free_list(list_token *head)
 
 int verifica_exit(char *cadena)
 {
-	char *cadena2 = _strdup(cadena);
+	char *cadena2 = strdup(cadena);
 	char *exit = "exit";
 
 	cadena2 = strtok(cadena2, "\n");
-	return (_strcmp(exit, cadena2));
+	return (strcmp(exit, cadena2));
+}
+
+int verifica_caracteres(char *cadena)
+{
+	int iter = 0;
+	while (cadena[iter])
+	{
+		if(cadena[iter] != ' ' || cadena[iter] != '\t' || cadena[iter] != '\n')
+		{
+			printf("hola");
+			return (0);
+		}
+		iter++;
+	}
+	return (1);
 }

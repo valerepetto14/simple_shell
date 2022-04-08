@@ -27,11 +27,12 @@ char **cargar(char *cadena, char **array);
 list_token *llenar_lista(char *path, list_token *lista);
 list_token *add_node_end(list_token **token,char *str);
 size_t print_list(const list_token *token);
-char *verifica(const list_token *lista, char *comando);
+char *verifica(list_token *lista, char *comando);
 void free_list(list_token *head);
 int _strlen(char *s);
 char *_strcat(char *dest, char *src);
 int _strcmp(char *s1, char *s2);
 char *_strdup(char *str);
 int verifica_exit(char *cadena);
+int verifica_caracteres(char *cadena);
 #endif

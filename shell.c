@@ -21,8 +21,9 @@ int main(int __attribute__((unused)) argc, char  __attribute__((unused)) *argv[]
 		lista = NULL;
 		printf(VERDE_T "$cisfun " BLANCO_T);
 		bytes_leidos = getline(&cadena, &numero_bytes, stdin);
-		if (cadena[0] == '\n')
-		{
+		if (cadena[0] == '\n' || verifica_caracteres(cadena) == 1)
+		{	
+			printf("hola");
 			free(cadena);
 			cadena = NULL;
 			continue;
